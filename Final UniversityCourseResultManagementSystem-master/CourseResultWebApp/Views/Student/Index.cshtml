@@ -1,0 +1,115 @@
+﻿@model CourseResultWebApp.Models.Student
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<link type="text/css" rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<h3>Register Student</h3>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @*<h4>Student</h4>
+        <hr />*@
+        @Html.ValidationSummary(true)
+
+        <div class="form-group" style="margin-top: 10px;">
+            @Html.LabelFor(model => model.StudentName, "Name", new { @class = "col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StudentName)
+                @Html.ValidationMessageFor(model => model.StudentName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StudentEmail,"Email", new { @class = "col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StudentEmail)
+                @Html.ValidationMessageFor(model => model.StudentEmail)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StudentContactNo,"Contact No.", new { @class = "col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StudentContactNo)
+                @Html.ValidationMessageFor(model => model.StudentContactNo)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RegDate,"Date", new { @class = "col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.RegDate, new { @id = "datepicker"})
+                @Html.ValidationMessageFor(model => model.RegDate)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StudentAddress,"Address", new { @class = "col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StudentAddress)
+                @Html.ValidationMessageFor(model => model.StudentAddress)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartmentId,"Department", new { @class = "col-md-2" })
+            <div class="col-md-10" style="margin-top: 5px">
+                @Html.DropDownListFor(model => model.DepartmentId, Model.Department_List, "------ select ------", new {@class = "width"})
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-left: 100px;">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Register" class="btn btn-default btn-primary" />
+            </div>
+        </div>
+    </div>
+    
+    
+    <script>
+        $(document).ready(function (){})
+    </script>
+    
+}
+@if (ViewBag.Validation != null)
+{
+    <div>
+        <p style="color: red;">@ViewBag.Validation.ToString()</p>
+    </div>
+}
+
+@if (ViewBag.Message != null)
+{
+    <div>
+        <p style="color: @ViewBag.Color;">@ViewBag.Message.ToString()</p>
+    </div>
+}
+
+@if (ViewBag.ShowResult != null)
+{
+    <div>
+        <p>@ViewBag.ShowResult.ToString()</p>
+    </div>
+}
+
+<script>
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

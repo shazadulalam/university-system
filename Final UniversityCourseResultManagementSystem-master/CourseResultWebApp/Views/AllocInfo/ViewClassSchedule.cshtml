@@ -1,0 +1,83 @@
+﻿@model IEnumerable<CourseResultWebApp.Models.AllocationInformation>
+
+@{
+    ViewBag.Title = "View Class Schedule";
+}
+
+<h2>View Class Schedule and Room Allocation Information</h2>
+@*
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor( model => model.RoomAllocId )
+            </th>
+            <th>
+                @Html.DisplayNameFor( model => model.DepartmentCode )
+            </th>
+            <th>
+                @Html.DisplayNameFor( model => model.CourseCode )
+            </th>
+            <th>
+                @Html.DisplayNameFor( model => model.CourseName )
+            </th>
+            <th>
+                @Html.DisplayNameFor( model => model.RoomName )
+            </th>
+            <th>
+                @Html.DisplayNameFor( model => model.RoomAllocDay )
+            </th>
+            <th>
+                @Html.DisplayNameFor( model => model.AllocTimeFrom )
+            </th>
+            <th>
+                @Html.DisplayNameFor( model => model.AllocTimeTo )
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach(var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor( modelItem => item.RoomAllocId )
+                </td>
+                <td>
+                    @Html.DisplayFor( modelItem => item.DepartmentCode )
+                </td>
+                <td>
+                    @Html.DisplayFor( modelItem => item.CourseCode )
+                </td>
+                <td>
+                    @Html.DisplayFor( modelItem => item.CourseName )
+                </td>
+                <td>
+                    @Html.DisplayFor( modelItem => item.RoomName )
+                </td>
+                <td>
+                    @Html.DisplayFor( modelItem => item.RoomAllocDay )
+                </td>
+                <td>
+                    @Html.DisplayFor( modelItem => item.AllocTimeFrom )
+                </td>
+                <td>
+                    @Html.DisplayFor( modelItem => item.AllocTimeTo )
+                </td>
+            </tr>
+        }
+
+    </table>*@
+
+<form method="POST" id="classScheduleForm">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label for="" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select name="DepartmentCode" id="deptCode">
+                    <option class="form-control" value="">--SELECT DEPARTMENT--</option>
+                    @foreach(var department in ViewBag.Department) {
+                        <option class="form-control" value=""> </option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+</form>

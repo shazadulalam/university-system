@@ -1,0 +1,56 @@
+﻿@model CourseResultWebApp.Models.CourseTeacher
+@{
+    ViewBag.Title = "View Course Statics";
+}
+
+<div class="main-container">
+    <fieldset>
+        <legend>View Course Statics</legend>
+
+        <table>
+            <tr>
+                <td>@Html.LabelFor(x => x.DepartmentId)</td>
+                <td>@Html.DropDownListFor(x => x.DepartmentId, new SelectList(ViewBag.Departments, "Value", "Text"))</td>
+                <td>@Html.ValidationMessageFor(m => m.DepartmentId)</td>
+            </tr>
+        </table>
+
+        <div style="font-size: 14px; font-weight: bold;text-align: center">Course Information</div>
+        <table id="CourseInfo" class="output-table table table-hover table-bordered">
+            <thead class="thead-inverse">
+                <tr>
+                    <th style="width: 100px;">Code</th>
+                    <th style="width: 220px;">Name</th>
+                    <th style="width: 120px;">Semester</th>
+                    <th style="width: 220px;">Assigned To</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </fieldset>
+</div>
+
+@section Scripts {
+    <script>
+            $(document).ready(function () {
+                $("#DepartmentId").change(function () {
+                    $('#CourseInfo tbody').empty();
+
+                    var deptId = $("#DepartmentId").val();
+                    var json = { DepartmentId: deptId, };
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("AjaxGetCourseInfo", "CourseTeacher")',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(json),
+                        success: function (data) {
+                            $.each(data, function (key, value) {
+                                var teacherName = value.Teacher != "" ? value.Teacher : "Not Assigned Yet";
+                                $("#CourseInfo tbody").append('<tr><td>' + value.CourseCode + '</td><td>' + value.CourseName + '</td><td>' + value.Semester + '</td><td>' + teacherName + '</td></tr>');
+                            });
+                        }
+                    });
+                });
+            });
+    </script>
+}

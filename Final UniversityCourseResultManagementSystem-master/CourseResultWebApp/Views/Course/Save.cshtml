@@ -1,0 +1,60 @@
+﻿@model CourseResultWebApp.Models.Course
+
+@{
+    ViewBag.Title = "Save Course";
+}
+
+<div class="main-container">
+    <fieldset>
+        <legend>Save Course</legend>
+        @using (Html.BeginForm())
+        {
+
+            <table class="input-table">
+                <tr>
+                    <td class="label-cont">@Html.LabelFor(x => x.CourseCode)</td>
+                    <td class="field-cont">@Html.TextBoxFor(m => m.CourseCode)</td>
+                    <td class="msg-cont">@Html.ValidationMessageFor(y => y.CourseCode)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x => x.CourseName)</td>
+                    <td>@Html.TextBoxFor(x => x.CourseName)</td>
+                    <td>@Html.ValidationMessageFor(y => y.CourseName)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x => x.CourseCredit)</td>
+                    <td>@Html.TextBoxFor(x => x.CourseCredit)</td>
+                    <td>@Html.ValidationMessageFor(m => m.CourseCredit)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x => x.CourseDescription)</td>
+                    <td>@Html.TextAreaFor(x => x.CourseDescription)</td>
+                    <td>@Html.ValidationMessageFor(m => m.CourseDescription)</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x => x.DepartmentId)</td>
+                    <td>@Html.DropDownListFor(x => x.DepartmentId, new SelectList(ViewBag.Departments, "Value", "Text"))</td>
+                    <td>@Html.ValidationMessageFor(m => m.DepartmentId)</td>
+                </tr>
+
+                @*<tr>
+                    <td>@Html.LabelFor(x => x.Semester)</td>
+                    <td>@Html.DropDownListFor(x => x.Semester, new SelectList(ViewBag.Semesters, "Value", "Text"))</td>
+                    <td>@Html.ValidationMessageFor(m => m.Semester)</td>
+                </tr>*@
+                <tr class="message">
+                    <td colspan="3">
+                        @if (ViewBag.Message != null)
+                        {
+                            @ViewBag.Message
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Submit"></td>
+                </tr>
+            </table>
+        }
+    </fieldset>
+</div>

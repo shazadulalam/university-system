@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - University Course & Result Management System</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+<<<<<<< 6ddd651715f2bd4d41a8a6797b4f7a52a08666d8
+=======
+    @Scripts.Render("~/bundles/jquery")
+>>>>>>> Final Commit
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+<<<<<<< 6ddd651715f2bd4d41a8a6797b4f7a52a08666d8
+                    <li>@Html.ActionLink("DepartmentName", "ViewAllDepartmentName", "DepartmentName")</li>
+                    <li>@Html.ActionLink("Course", "someAction", "someController")</li>
+                    <li>@Html.ActionLink("Teacher", "someAction", "someController")</li>
+                    <li>@Html.ActionLink("Assign Course", "someAction", "someController")</li>
+                    <li>@Html.ActionLink("Register Student", "someAction", "someController")</li>
+                    <li>@Html.ActionLink("Allocate Class Room", "someAction", "someController")</li>
+                    <li>@Html.ActionLink("Course Enrollment", "someAction", "someController")</li>
+                    <li>@Html.ActionLink("Results", "ViewResult", "Result")</li>
+=======
+                    <li>@Html.ActionLink("Department", "Save", "Department")</li>
+                    <li>@Html.ActionLink("Course", "Save", "Course")</li>
+                    <li>@Html.ActionLink("Teacher", "someAction", "someController")</li>
+                    <li>@Html.ActionLink("Assign Course", "someAction", "someController")</li>
+                    <li>@Html.ActionLink("Register Student", "Index", "Student")</li>
+                    <li>@Html.ActionLink("Allocate Class Room", "someAction", "someController")</li>
+                    <li>@Html.ActionLink("Course Enrollment", "someAction", "someController")</li>
+                    <li>@Html.ActionLink("Results", "someAction", "someController")</li>
+>>>>>>> Final Commit
+                    <li>@Html.ActionLink("Unassign", "someAction", "someController")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - University Course & Result Management System</p>
+        </footer>
+    </div>
+
+<<<<<<< 6ddd651715f2bd4d41a8a6797b4f7a52a08666d8
+    @Scripts.Render("~/bundles/jquery")
+=======
+    
+>>>>>>> Final Commit
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,95 @@
+﻿@model CourseResultWebApp.Models.Result
+
+@{
+    ViewBag.Title = "View Result";
+}
+
+<h2>View Result</h2>
+
+
+@using(Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Result</h4>
+        <hr />
+        @Html.ValidationSummary( true, "", new { @class = "text-danger" } )
+        <div class="form-group">
+            @Html.LabelFor( model => model.StudentRegNo, htmlAttributes: new { @class = "control-label col-md-2" } )
+            <div class="col-md-10">
+                @Html.DropDownListFor( model => model.StudentRegNo, new SelectList( ViewBag.StudentListForDDL, "Value", "Text" ), "--SELECT--", new { @class = "form-control", @id = "studentReg" } )
+                @Html.ValidationMessageFor( model => model.StudentRegNo, "", new { @class = "text-danger" } )
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor( model => model.StudentName, htmlAttributes: new { @class = "control-label col-md-2" } )
+            <div class="col-md-10">
+                @Html.TextBoxFor( model => model.StudentName, new { @class = "form-control", @readonly = "readonly", @id = "StudentName" } )
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor( model => model.StudentEmail, htmlAttributes: new { @class = "control-label col-md-2" } )
+            <div class="col-md-10">
+                @Html.TextBoxFor( model => model.StudentEmail, new { @class = "form-control", @readonly = "readonly", id = "stdEmail" } )
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor( model => model.DepartmentName, htmlAttributes: new { @class = "control-label col-md-2" } )
+            <div class="col-md-10">
+                @Html.TextBoxFor( model => model.DepartmentName, new { @class = "form-control", @readonly = "readonly", id = "DepartmentName" } )
+            </div>
+        </div>
+    </div>
+}
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <button class="btn btn-default" id="makePDFClick">MAKE PDF</button>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-12" id="htmlexportPDF">
+        <table class="table" id="viewTable">
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery-2.2.0.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#studentReg").change(function () {
+                var reg = $("#studentReg").val();
+                $("#StudentName").val('');
+                $("#stdEmail").val('');
+                $("#DepartmentName").val('');
+                $("#tableBody").empty();
+                $("#tableBody").append('<tr> <th>Course Code </th> <th>Name</th> <th> Grade </th>');
+                var tblData = '';
+                var json = { registrationNo: reg };
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetStudentByRegNo", "Result")',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(json),
+                    success: function (data) {
+                        $.each(data, function (key, value) {
+                            $("#StudentName").val(value.StudentName);
+                            $("#stdEmail").val(value.StudentEmail);
+                            $("#DepartmentName").val(value.DepartmentName);
+
+                            tblData = '<tr><td>' + value.CourseCode + '</td><td>' + value.CourseName + '</td><td>' + value.CourseGarde + '</td></tr>';
+                            $('#viewTable').append(tblData);
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

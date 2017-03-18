@@ -1,0 +1,26 @@
+﻿@model CourseResultWebApp.Models.Department
+
+@using CourseResultWebApp.Models
+@{
+    ViewBag.Title = "View Department";
+    List<Department> departments = new List<Department>();
+    departments = ViewBag.Departments;
+}
+<div class="main-container">
+    <fieldset>
+        <legend>View All Department</legend>
+        <table class="output-table table table-hover table-bordered">
+            <tr>
+                <th style="width: 70px;">Code</th>
+                <th style="width: 250px;">Name</th>
+            </tr>
+            @foreach (var department in departments)
+            {
+                <tr>
+                    <td>@department.Code</td>
+                    <td>@department.Name</td>
+                </tr>
+            }
+        </table>
+    </fieldset>
+</div>
